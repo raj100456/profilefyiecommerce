@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://profilefyiecommerce-backend.onrender.com";
+const API_URL = "https://profilefyiecommerce.onrender.com";
 
 export const register = async (userData) => {
   try {

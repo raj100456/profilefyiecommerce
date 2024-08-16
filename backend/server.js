@@ -9,7 +9,8 @@ connectDB();
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin:
+      "https://profilefyiecomm-3amoglwo1-rajs-projects-a9b7d87e.vercel.app/",
     credentials: true,
   })
 );
