@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/profilefyiecommerce%3E/static/css/main.1fe2bd9d.css",
-    "main.js": "/profilefyiecommerce%3E/static/js/main.d4bfad9c.js",
-    "static/media/background.jpg": "/profilefyiecommerce%3E/static/media/background.d157a76b5d1f148d3cd5.jpg",
-    "static/media/logo.svg": "/profilefyiecommerce%3E/static/media/logo.1012cb54d6414d7f2f65521ce58a4ebb.svg",
-    "static/media/profile-transparent-blue.svg": "/profilefyiecommerce%3E/static/media/profile-transparent-blue.1012cb54d6414d7f2f65521ce58a4ebb.svg",
-    "index.html": "/profilefyiecommerce%3E/index.html",
-    "main.1fe2bd9d.css.map": "/profilefyiecommerce%3E/static/css/main.1fe2bd9d.css.map",
-    "main.d4bfad9c.js.map": "/profilefyiecommerce%3E/static/js/main.d4bfad9c.js.map"
+    "main.css": "/profilefyiecommerce/static/css/main.1fe2bd9d.css",
+    "main.js": "/profilefyiecommerce/static/js/main.8bcdb10c.js",
+    "static/media/background.jpg": "/profilefyiecommerce/static/media/background.d157a76b5d1f148d3cd5.jpg",
+    "static/media/logo.svg": "/profilefyiecommerce/static/media/logo.1012cb54d6414d7f2f65521ce58a4ebb.svg",
+    "static/media/profile-transparent-blue.svg": "/profilefyiecommerce/static/media/profile-transparent-blue.1012cb54d6414d7f2f65521ce58a4ebb.svg",
+    "index.html": "/profilefyiecommerce/index.html",
+    "main.1fe2bd9d.css.map": "/profilefyiecommerce/static/css/main.1fe2bd9d.css.map",
+    "main.8bcdb10c.js.map": "/profilefyiecommerce/static/js/main.8bcdb10c.js.map"
   },
   "entrypoints": [
     "static/css/main.1fe2bd9d.css",
-    "static/js/main.d4bfad9c.js"
+    "static/js/main.8bcdb10c.js"
   ]
 }
