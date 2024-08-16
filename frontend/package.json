@@ -1,6 +1,6 @@
 {
   "homepage": "https://raj100456/profilefyiecommerce/tree/main/frontend",
-  "name": "profilefyiEcommercecart",
+  "name": "@profilefyi/ecommerce-cart",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
