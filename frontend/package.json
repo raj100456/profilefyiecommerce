@@ -1,6 +1,6 @@
 {
   "homepage": "https://raj100456/profilefyiecommerce/tree/main/frontend",
-  "name": "shopping-cart",
+  "name": "Profilefyi Ecommerce cart",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -46,7 +46,6 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.14",
-    "gh-pages": "^6.1.1",
     "postcss": "^8.4.21",
     "tailwindcss": "^3.2.7"
   }
