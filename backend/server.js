@@ -9,9 +9,12 @@ connectDB();
 
 app.use(
   cors({
-    origin:
-      "https://raj100456-profilefyi-ecommerce.vercel.app/" ||
+    origin: [
+      "https://raj100456-profilefyi-ecommerce.vercel.app/",
+      `https://raj100456-profilefyi-ecommerce-rajs-projects-a9b7d87e.vercel.app/`,
+      `https://raj100456-profilefyi-ecommerce-raj100456-rajs-projects-a9b7d87e.vercel.app/`,
       "http://localhost:3000",
+    ],
     credentials: true,
   })
 );
