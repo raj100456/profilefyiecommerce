@@ -14,9 +14,9 @@ const Cart = () => {
   const [discount, setDiscount] = useState(0);
   const [appliedCoupon, setAppliedCoupon] = useState(null);
   const [couponStatus, setCouponStatus] = useState({
-    SAVE10: false,
-    SAVE30: false,
-    SAVE50: false,
+    TENOFF: false,
+    THIRTYOFF: false,
+    FIFTYOFF: false,
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ const Cart = () => {
     }, 2000);
     setTimeout(() => {
       toast("Thanks for Shopping!! Visit Again", {
-        icon: "😊",
+        icon: "✨",
         duration: 3000,
         style: {
           borderRadius: "10px",
@@ -59,9 +59,9 @@ const Cart = () => {
       const finalAmount = Math.max(totalAmount - discount, 0);
       setAmount(finalAmount);
       setCouponStatus({
-        SAVE10: true,
-        SAVE30: totalAmount >= 300,
-        SAVE50: totalAmount >= 500,
+        TENOFF: true,
+        THIRTYOFF: totalAmount >= 300,
+        FIFTYOFF: totalAmount >= 500,
       });
     } else {
       setAmount(0);
@@ -79,13 +79,13 @@ const Cart = () => {
     let discountAmount = 0;
     let validCoupon = false;
     switch (coupon) {
-      case "SAVE10":
+      case "TENOFF":
         if (totalAmount > 0) {
           discountAmount = totalAmount * 0.1;
           validCoupon = true;
           if (totalAmount >= 300) {
             toast(
-              "You could save even more with SAVE30! (Orders of $300 or more)",
+              "You could save even more with THIRTYOFF! (Orders of $300 or more)",
               {
                 duration: 4000,
                 style: {
@@ -98,13 +98,13 @@ const Cart = () => {
           }
         }
         break;
-      case "SAVE30":
+      case "THIRTYOFF":
         if (totalAmount >= 300) {
           discountAmount = totalAmount * 0.3;
           validCoupon = true;
           if (totalAmount >= 500) {
             toast(
-              "You could save even more with SAVE50! (Orders of $500 or more)",
+              "You could save even more with FIFTYOFF! (Orders of $500 or more)",
               {
                 duration: 4000,
                 style: {
@@ -117,7 +117,7 @@ const Cart = () => {
           }
         }
         break;
-      case "SAVE50":
+      case "FIFTYOFF":
         if (totalAmount >= 500) {
           discountAmount = totalAmount * 0.5;
           validCoupon = true;
@@ -189,118 +189,128 @@ const Cart = () => {
                       </span>
                     </p>
                   </div>
-                </div>
-                <div className="flex flex-col gap-5">
-                  <div className="text-xl font-bold">
-                    <span className="text-gray-700 font-semibold">
-                      Total Amount:
-                    </span>{" "}
-                    ${amount > 0 ? amount.toFixed(2) : "0.00"}
-                  </div>
+                  {/* </div> */}
+                  <div className="flex flex-col gap-5">
+                    <div className="text-xl font-bold">
+                      <span className="text-gray-700 font-semibold">
+                        Total Amount:
+                      </span>{" "}
+                      ${amount > 0 ? amount.toFixed(2) : "0.00"}
+                    </div>
 
-                  <div className="bg-gray-100 p-4 rounded-lg border border-gray-300 shadow-md text-lg text-gray-800 flex flex-col gap-2">
-                    <div className="flex items-center justify-between">
+                    <div className="bg-gray-100 p-4 rounded-lg border border-gray-300 shadow-md text-lg text-gray-800 flex flex-col gap-2">
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-green-600">
+                          Coupon Code:
+                        </span>
+                        <span
+                          className={`font-bold ${
+                            appliedCoupon ? "text-green-600" : "text-gray-500"
+                          }`}
+                        >
+                          {appliedCoupon || "Not Applied"}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-gray-700">
+                          Discount:
+                        </span>
+                        <span className="font-bold text-green-600">
+                          ${discount.toFixed(2)}
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="font-bold text-gray-700">
+                          Amount Payable:
+                        </span>
+                        <span className="font-bold text-green-600">
+                          ${amount.toFixed(2)}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="bg-gray-100 p-4 rounded-lg border border-gray-300 shadow-md text-lg text-gray-800 flex flex-wrap gap-2 items-center justify-between">
                       <span className="font-bold text-green-600">
-                        Coupon Code:
+                        Coupon Codes:
                       </span>
-                      <span
-                        className={`font-bold ${
-                          appliedCoupon ? "text-green-600" : "text-gray-500"
-                        }`}
-                      >
-                        {appliedCoupon || "Not Applied"}
-                      </span>
+                      <div className="flex gap-2 flex-wrap">
+                        <span
+                          onClick={() => setCouponCode("TENOFF")}
+                          className={`font-bold ${
+                            couponStatus.TENOFF
+                              ? "text-red-600"
+                              : "text-gray-500 line-through"
+                          } bg-yellow-300 px-3 animate-pulse py-1 rounded-lg shadow-md cursor-pointer`}
+                        >
+                          TENOFF
+                        </span>
+                        <span
+                          onClick={() => setCouponCode("THIRTYOFF")}
+                          className={`font-bold ${
+                            couponStatus.THIRTYOFF
+                              ? "text-red-600"
+                              : "text-gray-500 line-through"
+                          } bg-yellow-300 px-3 py-1 animate-pulse rounded-lg shadow-md cursor-pointer`}
+                        >
+                          THIRTYOFF
+                        </span>
+                        <span
+                          onClick={() => setCouponCode("FIFTYOFF")}
+                          className={`font-bold ${
+                            couponStatus.FIFTYOFF
+                              ? "text-red-600"
+                              : "text-gray-500 line-through"
+                          } bg-yellow-300 px-3 py-1 animate-pulse rounded-lg shadow-md cursor-pointer`}
+                        >
+                          FIFTYOFF
+                        </span>
+                      </div>
+                      <div className="mt-2 text-sm text-gray-600">
+                        <p>Applicable for total amount of:</p>
+                        <ul className="list-disc pl-5">
+                          <li>Use "TENOFF" for 10% off for all orders</li>
+                          <li>
+                            Use "THIRTYOFF" 30% off for orders of $300 and above
+                          </li>
+                          <li>
+                            Use "FIFTYOFF" 50% off for orders of $500 and above
+                          </li>
+                        </ul>
+                      </div>
                     </div>
-                    <div className="flex items-center justify-between">
-                      <span className="font-bold text-gray-700">Discount:</span>
-                      <span className="font-bold text-green-600">
-                        ${discount.toFixed(2)}
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="font-bold text-gray-700">
-                        Amount Payable:
-                      </span>
-                      <span className="font-bold text-green-600">
-                        ${amount.toFixed(2)}
-                      </span>
-                    </div>
-                  </div>
 
-                  <div className="bg-gray-100 p-4 rounded-lg border border-gray-300 shadow-md text-lg text-gray-800 flex flex-wrap gap-2 items-center justify-between">
-                    <span className="font-bold text-green-600">
-                      Coupon Codes:
-                    </span>
-                    <div className="flex gap-2 flex-wrap">
-                      <span
-                        className={`font-bold ${
-                          couponStatus.SAVE10
-                            ? "text-red-600"
-                            : "text-gray-500 line-through"
-                        } bg-yellow-300 px-3 animate-pulse py-1 rounded-lg shadow-md`}
-                      >
-                        SAVE10
-                      </span>
-                      <span
-                        className={`font-bold ${
-                          couponStatus.SAVE30
-                            ? "text-red-600"
-                            : "text-gray-500 line-through"
-                        } bg-yellow-300 px-3 py-1 animate-pulse rounded-lg shadow-md`}
-                      >
-                        SAVE30
-                      </span>
-                      <span
-                        className={`font-bold ${
-                          couponStatus.SAVE50
-                            ? "text-red-600"
-                            : "text-gray-500 line-through"
-                        } bg-yellow-300 px-3 py-1 animate-pulse rounded-lg shadow-md`}
-                      >
-                        SAVE50
-                      </span>
+                    <div className="flex flex-col sm:flex-row items-center gap-3 mt-4">
+                      <input
+                        type="text"
+                        placeholder="Enter coupon code"
+                        value={couponCode}
+                        onChange={(e) => setCouponCode(e.target.value)}
+                        className="flex-grow p-2 border border-gray-300 rounded-md mb-3 sm:mb-0"
+                      />
+                      {!appliedCoupon ? (
+                        <button
+                          onClick={applyCoupon}
+                          className="bg-green-500 hover:bg-green-700 rounded py-2 px-2 border-2 text-white transition duration-300 ease-linear border-green-600 font-bold"
+                        >
+                          Apply Coupon
+                        </button>
+                      ) : (
+                        <button
+                          onClick={removeCoupon}
+                          className="bg-red-600 hover:bg-red-800 rounded py-2 px-2 border-2 text-white transition duration-300 ease-linear border-red-700 font-bold"
+                        >
+                          Remove Coupon
+                        </button>
+                      )}
                     </div>
-                    <div className="mt-2 text-sm text-gray-600">
-                      <p>Applicable for total amount of:</p>
-                      <ul className="list-disc pl-5">
-                        <li>$10 off for all orders</li>
-                        <li>$30 off for orders of $300 and above</li>
-                        <li>$50 off for orders of $500 and above</li>
-                      </ul>
-                    </div>
-                  </div>
 
-                  <div className="flex flex-col sm:flex-row items-center gap-3 mt-4">
-                    <input
-                      type="text"
-                      placeholder="Enter coupon code"
-                      value={couponCode}
-                      onChange={(e) => setCouponCode(e.target.value)}
-                      className="flex-grow p-2 border border-gray-300 rounded-md mb-3 sm:mb-0"
-                    />
-                    {!appliedCoupon ? (
-                      <button
-                        onClick={applyCoupon}
-                        className="bg-green-500 hover:bg-green-700 rounded py-2 px-2 border-2 text-white transition duration-300 ease-linear border-green-600 font-bold"
-                      >
-                        Apply Coupon
-                      </button>
-                    ) : (
-                      <button
-                        onClick={removeCoupon}
-                        className="bg-red-600 hover:bg-red-800 rounded py-2 px-2 border-2 text-white transition duration-300 ease-linear border-red-700 font-bold"
-                      >
-                        Remove Coupon
-                      </button>
-                    )}
+                    <button
+                      onClick={payment}
+                      className="bg-green-700 hover:bg-green-900 rounded-lg text-white transition duration-300 ease-linear mt-5 border-2 border-green-600 font-bold p-3 text-xl"
+                    >
+                      CheckOut Now
+                    </button>
                   </div>
-
-                  <button
-                    onClick={payment}
-                    className="bg-green-700 hover:bg-green-900 rounded-lg text-white transition duration-300 ease-linear mt-5 border-2 border-green-600 font-bold p-3 text-xl"
-                  >
-                    CheckOut Now
-                  </button>
                 </div>
               </div>
             </div>

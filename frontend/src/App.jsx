@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Thank from "./pages/Thank";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -15,6 +16,7 @@ const App = () => {
         <Route path="/cart" element={<Cart />} />
         <Route path="/thankyou" element={<Thank />} />
       </Routes>
+      <Footer />
     </div>
   );
 };

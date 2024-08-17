@@ -45,6 +45,10 @@ const Register = () => {
         <h1 className="text-2xl font-bold text-center text-gray-900">
           Sign Up
         </h1>
+        <p className="mt-2 text-center text-sm text-red-400">
+          Note: Please wait a few moments for backend to start if this is your
+          first time registering.
+        </p>
         <form onSubmit={onSubmit} className="space-y-6">
           <div>
             <label
