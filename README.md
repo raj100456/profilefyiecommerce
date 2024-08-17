@@ -1,3 +1,7 @@
+# Vercel deployed link
+
+frontEnd : https://raj100456-profilefyi-ecommerce.vercel.app/
+
 # Profile.fyi E-commerce Project
 
 This is an e-commerce project for Profile.fyi, built with a React frontend and an Express/MongoDB backend.
