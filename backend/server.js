@@ -9,7 +9,9 @@ connectDB();
 
 app.use(
   cors({
-    origin: "https://profilefyiecomm.vercel.app" || "http://localhost:3000",
+    origin:
+      "https://raj100456-profilefyi-ecommerce.vercel.app/" ||
+      "http://localhost:3000",
     credentials: true,
   })
 );
