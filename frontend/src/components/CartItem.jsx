@@ -33,7 +33,7 @@ const CartItem = ({ item }) => {
           <p className="text-base text-slate-700 font-medium">
             {item.description}
           </p>
-          <p className="text-green-600 font-bold text-lg">${item.price}</p>
+          <p className="text-purple-600 font-bold text-lg">${item.price}</p>
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
               <button

@@ -14,9 +14,9 @@ const Cart = () => {
   const [discount, setDiscount] = useState(0);
   const [appliedCoupon, setAppliedCoupon] = useState(null);
   const [couponStatus, setCouponStatus] = useState({
-    TENOFF: false,
-    THIRTYOFF: false,
-    FIFTYOFF: false,
+    OFF10: false,
+    OFF30: false,
+    OFF50: false,
   });
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -59,9 +59,9 @@ const Cart = () => {
       const finalAmount = Math.max(totalAmount - discount, 0);
       setAmount(finalAmount);
       setCouponStatus({
-        TENOFF: true,
-        THIRTYOFF: totalAmount >= 300,
-        FIFTYOFF: totalAmount >= 500,
+        OFF10: true,
+        OFF30: totalAmount >= 300,
+        OFF50: totalAmount >= 500,
       });
     } else {
       setAmount(0);
@@ -79,11 +79,11 @@ const Cart = () => {
     let discountAmount = 0;
     let validCoupon = false;
     switch (coupon) {
-      case "TENOFF":
+      case "OFF10":
         if (totalAmount > 0) {
           discountAmount = totalAmount * 0.1;
           validCoupon = true;
-          if (totalAmount >= 300) {
+          if (totalAmount <= 300) {
             toast(
               "You could save even more with THIRTYOFF! (Orders of $300 or more)",
               {
@@ -98,11 +98,11 @@ const Cart = () => {
           }
         }
         break;
-      case "THIRTYOFF":
+      case "OFF30":
         if (totalAmount >= 300) {
           discountAmount = totalAmount * 0.3;
           validCoupon = true;
-          if (totalAmount >= 500) {
+          if (totalAmount <= 500) {
             toast(
               "You could save even more with FIFTYOFF! (Orders of $500 or more)",
               {
@@ -117,7 +117,7 @@ const Cart = () => {
           }
         }
         break;
-      case "FIFTYOFF":
+      case "OFF50":
         if (totalAmount >= 500) {
           discountAmount = totalAmount * 0.5;
           validCoupon = true;
@@ -132,10 +132,9 @@ const Cart = () => {
       setDiscount(discountAmount);
       setAppliedCoupon(coupon);
       toast.success(
-        `Coupon applied successfully! ${coupon.replace(
-          "SAVE",
-          ""
-        )}% off ($${discountAmount.toFixed(2)})`
+        `Coupon applied successfully! 
+        ${coupon.replace("OFF", "")}% off 
+        ($${discountAmount.toFixed(2)})`
       );
     } else {
       setDiscount(0);
@@ -159,9 +158,10 @@ const Cart = () => {
         style={{
           backgroundImage:
             "url('https://images.unsplash.com/photo-1479920252409-6e3d8e8d4866?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')",
+          backgroundSize: "cover",
         }}
       >
-        <div className="mb-10 px-4 sm:px-6 lg:px-8">
+        <div className="mb-0 px-4 sm:px-6 lg:px-8">
           {cart.length > 0 ? (
             <div className="flex flex-col lg:flex-row lg:justify-center max-w-7xl mx-auto gap-x-5">
               <div className="lg:w-[60%] flex flex-col p-2">
@@ -177,10 +177,10 @@ const Cart = () => {
               <div className="lg:w-[40%] mt-5 flex flex-col">
                 <div className="flex flex-col h-[100%] justify-between p-5 gap-5 my-14">
                   <div className="flex flex-col gap-5">
-                    <div className="font-semibold text-xl text-green-800">
+                    <div className="font-semibold text-xl text-purple-800">
                       Your Cart
                     </div>
-                    <div className="font-semibold text-5xl text-green-700 -mt-5">
+                    <div className="font-semibold text-5xl text-purple-700 -mt-5">
                       Summary
                     </div>
                     <p className="text-xl">
@@ -200,12 +200,12 @@ const Cart = () => {
 
                     <div className="bg-gray-100 p-4 rounded-lg border border-gray-300 shadow-md text-lg text-gray-800 flex flex-col gap-2">
                       <div className="flex items-center justify-between">
-                        <span className="font-bold text-green-600">
+                        <span className="font-bold text-purple-600">
                           Coupon Code:
                         </span>
                         <span
                           className={`font-bold ${
-                            appliedCoupon ? "text-green-600" : "text-gray-500"
+                            appliedCoupon ? "text-purple-600" : "text-gray-500"
                           }`}
                         >
                           {appliedCoupon || "Not Applied"}
@@ -215,7 +215,7 @@ const Cart = () => {
                         <span className="font-bold text-gray-700">
                           Discount:
                         </span>
-                        <span className="font-bold text-green-600">
+                        <span className="font-bold text-purple-600">
                           ${discount.toFixed(2)}
                         </span>
                       </div>
@@ -223,57 +223,57 @@ const Cart = () => {
                         <span className="font-bold text-gray-700">
                           Amount Payable:
                         </span>
-                        <span className="font-bold text-green-600">
+                        <span className="font-bold text-purple-600">
                           ${amount.toFixed(2)}
                         </span>
                       </div>
                     </div>
 
                     <div className="bg-gray-100 p-4 rounded-lg border border-gray-300 shadow-md text-lg text-gray-800 flex flex-wrap gap-2 items-center justify-between">
-                      <span className="font-bold text-green-600">
+                      <span className="font-bold text-purple-600">
                         Coupon Codes:
                       </span>
                       <div className="flex gap-2 flex-wrap">
                         <span
-                          onClick={() => setCouponCode("TENOFF")}
+                          onClick={() => setCouponCode("OFF10")}
                           className={`font-bold ${
-                            couponStatus.TENOFF
+                            couponStatus.OFF10
                               ? "text-red-600"
                               : "text-gray-500 line-through"
                           } bg-yellow-300 px-3 animate-pulse py-1 rounded-lg shadow-md cursor-pointer`}
                         >
-                          TENOFF
+                          OFF10
                         </span>
                         <span
-                          onClick={() => setCouponCode("THIRTYOFF")}
+                          onClick={() => setCouponCode("OFF30")}
                           className={`font-bold ${
-                            couponStatus.THIRTYOFF
+                            couponStatus.OFF30
                               ? "text-red-600"
                               : "text-gray-500 line-through"
                           } bg-yellow-300 px-3 py-1 animate-pulse rounded-lg shadow-md cursor-pointer`}
                         >
-                          THIRTYOFF
+                          OFF30
                         </span>
                         <span
-                          onClick={() => setCouponCode("FIFTYOFF")}
+                          onClick={() => setCouponCode("OFF50")}
                           className={`font-bold ${
-                            couponStatus.FIFTYOFF
+                            couponStatus.OFF50
                               ? "text-red-600"
                               : "text-gray-500 line-through"
                           } bg-yellow-300 px-3 py-1 animate-pulse rounded-lg shadow-md cursor-pointer`}
                         >
-                          FIFTYOFF
+                          OFF50
                         </span>
                       </div>
                       <div className="mt-2 text-sm text-gray-600">
                         <p>Applicable for total amount of:</p>
                         <ul className="list-disc pl-5">
-                          <li>Use "TENOFF" for 10% off for all orders</li>
+                          <li>Use "OFF10" for 10% off for all orders</li>
                           <li>
-                            Use "THIRTYOFF" 30% off for orders of $300 and above
+                            Use "OFF30" 30% off for orders of $300 and above
                           </li>
                           <li>
-                            Use "FIFTYOFF" 50% off for orders of $500 and above
+                            Use "OFF50" 50% off for orders of $500 and above
                           </li>
                         </ul>
                       </div>
@@ -290,7 +290,7 @@ const Cart = () => {
                       {!appliedCoupon ? (
                         <button
                           onClick={applyCoupon}
-                          className="bg-green-500 hover:bg-green-700 rounded py-2 px-2 border-2 text-white transition duration-300 ease-linear border-green-600 font-bold"
+                          className="bg-purple-500 hover:bg-purple-700 rounded py-2 px-2 border-2 text-white transition duration-300 ease-linear border-purple-600 font-bold"
                         >
                           Apply Coupon
                         </button>
@@ -306,7 +306,7 @@ const Cart = () => {
 
                     <button
                       onClick={payment}
-                      className="bg-green-700 hover:bg-green-900 rounded-lg text-white transition duration-300 ease-linear mt-5 border-2 border-green-600 font-bold p-3 text-xl"
+                      className="bg-purple-700 hover:bg-purple-900 rounded-lg text-white transition duration-300 ease-linear mt-5 border-2 border-purple-600 font-bold p-3 text-xl"
                     >
                       CheckOut Now
                     </button>
@@ -320,7 +320,7 @@ const Cart = () => {
                 Your cart is empty!
               </h1>
               <NavLink to="/home">
-                <button className="uppercase bg-green-600 p-3 px-10 rounded-lg text-white mt-6 font-semibold tracking-wider hover:bg-green-700 duration-300 transition-all ease-in">
+                <button className="uppercase bg-purple-600 p-3 px-10 rounded-lg text-white mt-6 font-semibold tracking-wider hover:bg-purple-700 duration-300 transition-all ease-in">
                   Shop Now
                 </button>
               </NavLink>

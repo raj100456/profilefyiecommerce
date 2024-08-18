@@ -15,7 +15,7 @@ const Navbar = () => {
   };
 
   return (
-    <div className="bg-[#454845]">
+    <div className="bg-gray-700">
       <div className="flex flex-row justify-between items-center h-20 max-w-6xl mx-auto">
         <NavLink to="/home">
           <div className="ml-6">
@@ -32,7 +32,7 @@ const Navbar = () => {
             <div className="relative">
               <FaShoppingCart className="text-2xl " />
               {cart.length > 0 && (
-                <span className="absolute -top-1 -right-2 bg-green-600 rounded-full text-sm w-5 h-5 grid justify-items-center animate-bounce text-white">
+                <span className="absolute -top-1 -right-2 bg-purple-600 rounded-full text-sm w-5 h-5 grid justify-items-center animate-bounce text-white">
                   {cart.length}
                 </span>
               )}
