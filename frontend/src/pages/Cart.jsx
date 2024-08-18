@@ -85,7 +85,7 @@ const Cart = () => {
           validCoupon = true;
           if (totalAmount <= 300) {
             toast(
-              "You could save even more with THIRTYOFF! (Orders of $300 or more)",
+              "You could save even more with OFF30! (Orders of $300 or more)",
               {
                 duration: 4000,
                 style: {
@@ -104,7 +104,7 @@ const Cart = () => {
           validCoupon = true;
           if (totalAmount <= 500) {
             toast(
-              "You could save even more with FIFTYOFF! (Orders of $500 or more)",
+              "You could save even more with OFF50! (Orders of $500 or more)",
               {
                 duration: 4000,
                 style: {
